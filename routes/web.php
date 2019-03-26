@@ -90,6 +90,7 @@ Route::group(
 		Route::match(['get', 'post'], 'contact_create', 'HomeController@contact_create');
 		Route::post('set_session', 'HomeController@set_session');
 		Route::get('s', 'SearchController@index');
+		Route::get('s0', 'SearchController@index0');
 		Route::match(['get', 'post'], 'searchResult', 'SearchController@searchResult');
 		Route::match(['get', 'post'], 'searchResultTest', 'SearchController@searchResultTest');
 		Route::match(['get', 'post'], 'searchexperienceResult', 'SearchController@searchexperienceResult');

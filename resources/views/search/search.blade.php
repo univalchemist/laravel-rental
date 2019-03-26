@@ -1305,7 +1305,7 @@
             </div>
         </div>
         <!--Map view to delete start-->
-        <div class="map hide-sm-view">
+        <div class="map hide-sm-view" style="display: none!important">
 
             <div id="map_canvas" role="presentation" class="map-canvas"
                  style="position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(164, 221, 245);">

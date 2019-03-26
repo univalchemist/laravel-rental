@@ -190,6 +190,140 @@ class SearchController extends Controller
             return view('host_experiences.search', $data);
         }
     }
+
+    public function index0(Request $request)
+    {
+        $current_refinement="Homes"; //either homes or experiences default Homes
+        /*HostExperiencePHPCommentStart
+        if(!empty($request->input('current_refinement')))
+        {
+            $current_refinement=@$request->input('current_refinement');
+        }
+        HostExperiencePHPCommentEnd*/
+
+
+        $previous_currency = Session::get('search_currency');
+        $deleted_currency = Session::get('deleted_currency');
+        $currency = Session::get('currency');
+        $full_address = $request->input('location');
+        $address      = str_replace(" ", "+", "$full_address");
+        $geocode      = @file_get_contents('https://maps.google.com/maps/api/geocode/json?key='.MAP_SERVER_KEY.'&address='.$address.'&sensor=false');
+        $json         = json_decode($geocode);
+
+        if(@$json->{'results'})
+        {
+            $data['lat']  = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+            $data['long'] = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+            $data['viewport'] = $json->{'results'}[0]->{'geometry'}->{'viewport'};
+        }
+        else
+        {
+            $data['lat']  = 0;
+            $data['long'] = 0;
+            $data['viewport'] = '';
+        }
+
+        $rooms = Rooms::join(
+            'rooms_price',function($join){
+            $join->on('rooms.id','=','rooms_price.room_id');
+        })->
+        join('rooms_address', function($join) {
+            $join->on('rooms.id', '=', 'rooms_address.room_id');
+        })->
+        join('users',function($join){
+            $join->on('rooms.user_id','=',"users.id");
+        })->where('rooms_address.latitude')->where('rooms.status','Listed')->get();
+
+        $checkin_date_format        = $request->input('checkin_date_format');
+        $checkout_date_format      = $request->input('checkout_date_format');
+        $php_date_format      = $request->input('php_date_format');
+
+        //if dont have choose date , set default date
+        //echo $a; exit;
+        if(!empty($request->input('checkin_date_format'))){
+            $data['st_date'] = date(PHP_DATE_FORMAT,$this->helper->custom_strtotime($checkin_date_format, $php_date_format));
+        } elseif(!empty($request->input('checkin')) && $this->helper->custom_strtotime($request->input('checkin'), $php_date_format)) {
+            $data['st_date'] = date(PHP_DATE_FORMAT,$this->helper->custom_strtotime($request->input('checkin'), $php_date_format));
+            //$data['checkin'] = $request->input('checkin'); Previously used method for reference
+            $data['checkin'] = date(PHP_DATE_FORMAT,$this->helper->custom_strtotime($request->input('checkin'), $php_date_format));
+        } else {
+            $data['checkin'] = '';
+            $data['st_date'] = '';
+        }
+        if(!empty($request->input('checkout_date_format'))){
+            $data['end_date'] = date(PHP_DATE_FORMAT, $this->helper->custom_strtotime($checkout_date_format, $php_date_format));
+        } elseif(!empty($request->input('checkout')) && $this->helper->custom_strtotime($request->input('checkout'), $php_date_format)) {
+            $data['end_date'] = date(PHP_DATE_FORMAT,$this->helper->custom_strtotime($request->input('checkout'), $php_date_format));
+            //$data['checkout'] = $request->input('checkout'); Previously used method for reference
+            $data['checkout'] = date(PHP_DATE_FORMAT,$this->helper->custom_strtotime($request->input('checkout'), $php_date_format));
+        } else {
+            $data['end_date'] = '';
+            $data['checkout'] = '';
+        }
+
+        $data['location']           = $request->input('location');
+
+
+        $data['guest']              = $request->input('guests')=='' ? 1 : $request->input('guests');
+        $data['bedrooms']           = $request->input('bedrooms');
+        $data['bathrooms']          = $request->input('bathrooms');
+        $data['beds']               = $request->input('beds');
+        $data['property_type']      = $request->input('property_type');
+        $data['room_type']          = $request->input('room_type');
+        $data['amenities']          = $request->input('amenities');
+        $data['min_price']          = $request->input('min_price');
+        $data['max_price']          = $request->input('max_price');
+        $data['instant_book']       = $request->input('instant_book') ? $request->input('instant_book') : 0;
+
+        $data['room_type']          = RoomType::dropdown();
+        $data['room_types']         = RoomType::where('status','Active')->get();
+        $data['property_type_dropdown']      = PropertyType::active_all();
+        $data['amenities']          = Amenities::activeType()->active()->get();
+        $data['amenities_type']     = AmenitiesType::active_all();
+
+        $data['property_type_selected'] = explode(',', $request->input('property_type'));
+        $data['room_type_selected'] = explode(',', $request->input('room_type'));
+        $data['amenities_selected'] = explode(',', $request->input('amenities'));
+        $data['currency_symbol']    = Currency::first()->symbol;
+        $data['cat_type_selected'] = explode(',', $request->input('host_experience_category'));
+        $data['default_min_price'] = $this->payment_helper->currency_convert(DEFAULT_CURRENCY, $currency, MINIMUM_AMOUNT);
+        $data['default_max_price'] = $this->payment_helper->currency_convert(DEFAULT_CURRENCY, $currency, MAXIMUM_AMOUNT);
+
+        if(!$data['min_price'])
+        {
+            $data['min_price'] = $data['default_min_price'];
+            $data['max_price'] = $data['default_max_price'];
+        }elseif($previous_currency){
+            $data['min_price'] = $this->payment_helper->currency_convert($previous_currency, $currency, $data['min_price']);
+            $data['max_price'] = $this->payment_helper->currency_convert($previous_currency, $currency, $data['max_price']);
+        }
+        elseif($deleted_currency) {
+            $data['min_price'] = $data['default_min_price'];
+            $data['max_price'] = $data['default_max_price'];
+        }
+        else {
+            $data['min_price'] = $this->payment_helper->currency_convert('', $currency, $data['min_price']);
+            $data['max_price'] = $this->payment_helper->currency_convert('', $currency, $data['max_price']);
+        }
+        $data['max_price_check'] = $this->payment_helper->currency_convert('', DEFAULT_CURRENCY, $data['max_price']);
+        $data['current_refinement']=$current_refinement;
+        Session::forget('search_currency');
+        if($current_refinement=="Homes")
+        {
+            if($data['checkin'] != '' && $data['checkin'] == $data['checkout']){
+                $data['checkout'] = date(PHP_DATE_FORMAT,$this->helper->custom_strtotime($data['checkin'].'+1 day'));
+            }
+            return view('search0.search', $data);
+        }
+        else
+        {
+            $data['checkout'] = $data['checkin'];
+            $data['end_date'] = $data['st_date'];
+            $data['guest'] = $data['guest'] > 10 ? 10 : $data['guest'];
+            $data['host_experience_categories']=HostExperienceCategories::where('status','Active')->get();
+            return view('host_experiences.search', $data);
+        }
+    }
     /**
      * Ajax Search Result for Experience
      *
