@@ -191,8 +191,683 @@
                     </div>
                 </div>
                 <!---->
-                <div class="col-lg-12 col-md-12 col-sm-12" style="background-color: red;height: 500px">
+                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 50px;">
+                    <div class="row">
+                        <!-- side bar -->
+                        <div class="col-lg-3 col-md-4 show-out-md">
+                            <div class="left-sidebar">
+                                <div class="left-sidebar-container-1">
+                                    <div class="left-side-bar-title">
+                                        Price
+                                    </div>
+                                    <div class="left-sidebar-dropdown-container">
+                                        <div class="select-container" style="z-index: 80">
+                                            <select class="selectpicker">
+                                                <option>Min</option>
+                                                <option>$75</option>
+                                                <option>$150</option>
+                                                <option>$200</option>
+                                                <option>$250</option>
+                                            </select>
+                                        </div>
+                                        <div class="select-container" style="z-index: 80">
+                                            <select class="selectpicker">
+                                                <option>Max</option>
+                                                <option>$75</option>
+                                                <option>$150</option>
+                                                <option>$200</option>
+                                                <option>$250+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divider-line-fluid"></div>
 
+                                <div class="left-sidebar-container-2">
+                                        <div class="left-side-bar-title">
+                                            Type of Room
+                                            <span class="glyphicon glyphicon-question-sign"></span>
+                                        </div>
+                                        @foreach($room_types as $row)
+                                            <div class="rv-type-container">
+                                                <input type="checkbox" value="{{ $row->id }}" id="room_type_{{ $row->id }}"
+                                                       class=""
+                                                        {{in_array($row->id, $room_type_selected)  ? "checked" : ""}} />
+                                                <label class="search_check_label" for="room_type_{{ $row->id }}">{{ $row->name }}</label>
+                                            </div>
+                                        @endforeach
+                                </div>
+                                <div class="divider-line"></div>
+
+                                <div class="left-sidebar-container-3">
+                                    <div class="left-side-bar-title">
+                                        {{ trans('messages.lys.amenities') }}
+                                    </div>
+                                    @foreach($amenities as $row_amenities)
+                                        <div class=" rv-type-container">
+                                            <input type="checkbox" id="mob_amenities_{{ $row_amenities->id }}"
+                                                   value="{{ $row_amenities->id }}"
+                                                   class="amenities" {{in_array($row_amenities->id, $amenities_selected) ? 'checked' : ''}} />
+                                            <label class="search_check_label"
+                                                   for="mob_amenities_{{ $row_amenities->id }}">{{ $row_amenities->name }}</label>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                                <div class="divider-line"></div>
+
+                                <div class="left-sidebar-container-3">
+                                    <div class="left-side-bar-title">
+                                        {{ trans('messages.lys.property_type') }}
+                                    </div>
+                                    @foreach($property_type_dropdown as $row_property_type)
+                                            <div class=" rv-type-container">
+                                                <input type="checkbox"
+                                                       id="property_{{ $row_property_type->id }}"
+                                                       value="{{ $row_property_type->id }}"
+                                                       class="property_type" {{(in_array($row_property_type->id, $property_type_selected)) ? 'checked' : ''}} />
+                                                <label class="search_check_label"
+                                                       for="property_{{ $row_property_type->id }}">
+                                                    {{ $row_property_type->name }}
+                                                </label>
+                                            </div>
+                                    @endforeach
+                                </div>
+
+                                <div class="divider-line-fluid"></div>
+
+                                <div class="left-sidebar-container-4">
+                                    <div class="guests-container">
+                                        <div class="left-side-bar-title">
+                                            Guests
+                                        </div>
+                                        <div class="left-sidebar-dropdown-container">
+                                            <div class="select-container" style="z-index: 70">
+                                                <select class="selectpicker">
+                                                    <option>1+</option>
+                                                    <option>2+</option>
+                                                    <option>3+</option>
+                                                    <option>4+</option>
+                                                    <option>5+</option>
+                                                    <option>6+</option>
+                                                    <option>7+</option>
+                                                    <option>8+</option>
+                                                    <option>9+</option>
+                                                    <option>10+</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="divider-line-fluid"></div>
+
+                                <div class="left-sidebar-container-7">
+                                    <div class="additional-filters-container">
+                                        <div class="left-side-bar-title">
+                                            Additional Filters
+                                        </div>
+                                        <div class="rv-type-container">
+                                            <input type="checkbox" name="filter_instant_book" id="filter_instant_book">
+                                            <label for="filter_instant_book" class="search_check_label">
+                                                <span class="glyphicon glyphicon-flash" style="color: #f6bc16!important"></span>
+                                                Instant Book
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8">
+                            <div class="row">
+                                <div class="main-header">
+                                    <div class="some-title">
+                                        <div class="text-muted">Temecula - 509 RV Rentals</div>
+                                    </div>
+                                    <div class="sort-order-container">
+                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#filter-modal" class="filter-btn btn btn-default show-in-md" style="margin-bottom: 10px">
+                                            <span class="glyphicon glyphicon-filter"></span>
+                                            <span>Filters</span>
+                                        </a>
+                                        <select class="selectpicker">
+                                            <option value="3">Distance: Closest First</option>
+                                            <option value="5">Price: Low to High</option>
+                                            <option value="6">Price: High to Low</option>
+                                            <option value="7">Sleeps: Least to Most</option>
+                                            <option value="8">Sleeps: Most to Least</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-container">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card-search">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12 item-container">
+                                        <div class="card">
+                                            <div class="card-image-container">
+                                                <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
+                                                <div class="item-like">
+                                                    <span class="glyphicon glyphicon-heart-empty"></span>
+                                                </div>
+                                                <div class="card-label">
+                                                    <div class="glyphicon glyphicon-flash"></div>
+                                                    <div class="label-text">Instant Booking</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title-container">
+                                                    <div class="card-title">
+                                                        $135
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                            View This RV
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-description">
+                                                    Forest River Heritage Glen Wildwood 314
+                                                </div>
+                                                <div class="card-short-description">
+                                                    1.7 miles from Shenyang
+                                                </div>
+                                                <div class="card-short-description">
+                                                    Travel Trailer / Sleep 8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="filter-modal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header" style="display: flex">
+                                    <h4 class="modal-title" style="flex: 1">Filters</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body form-inline">
+                                    <div class="left-sidebar">
+                                        <div class="left-sidebar-container-1">
+                                            <div class="left-side-bar-title">
+                                                Price
+                                            </div>
+                                            <div class="left-sidebar-dropdown-container">
+                                                <div class="select-container" style="z-index: 80">
+                                                    <select class="selectpicker">
+                                                        <option>Min</option>
+                                                        <option>$75</option>
+                                                        <option>$150</option>
+                                                        <option>$200</option>
+                                                        <option>$250</option>
+                                                    </select>
+                                                </div>
+                                                <div class="select-container" style="z-index: 80">
+                                                    <select class="selectpicker">
+                                                        <option>Max</option>
+                                                        <option>$75</option>
+                                                        <option>$150</option>
+                                                        <option>$200</option>
+                                                        <option>$250+</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="divider-line-fluid"></div>
+
+                                        <div class="left-sidebar-container-2">
+                                            <div class="left-side-bar-title">
+                                                Type of Room
+                                                <span class="glyphicon glyphicon-question-sign"></span>
+                                            </div>
+                                            @foreach($room_types as $row)
+                                                <div class="rv-type-container">
+                                                    <input type="checkbox" value="{{ $row->id }}" id="room_type_{{ $row->id }}"
+                                                           class=""
+                                                            {{in_array($row->id, $room_type_selected)  ? "checked" : ""}} />
+                                                    <label class="search_check_label" for="room_type_{{ $row->id }}">{{ $row->name }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="divider-line"></div>
+
+                                        <div class="left-sidebar-container-3">
+                                            <div class="left-side-bar-title">
+                                                {{ trans('messages.lys.amenities') }}
+                                            </div>
+                                            @foreach($amenities as $row_amenities)
+                                                <div class=" rv-type-container">
+                                                    <input type="checkbox" id="mob_amenities_{{ $row_amenities->id }}"
+                                                           value="{{ $row_amenities->id }}"
+                                                           class="amenities" {{in_array($row_amenities->id, $amenities_selected) ? 'checked' : ''}} />
+                                                    <label class="search_check_label"
+                                                           for="mob_amenities_{{ $row_amenities->id }}">{{ $row_amenities->name }}</label>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                        <div class="divider-line"></div>
+
+                                        <div class="left-sidebar-container-3">
+                                            <div class="left-side-bar-title">
+                                                {{ trans('messages.lys.property_type') }}
+                                            </div>
+                                            @foreach($property_type_dropdown as $row_property_type)
+                                                <div class=" rv-type-container">
+                                                    <input type="checkbox"
+                                                           id="property_{{ $row_property_type->id }}"
+                                                           value="{{ $row_property_type->id }}"
+                                                           class="property_type" {{(in_array($row_property_type->id, $property_type_selected)) ? 'checked' : ''}} />
+                                                    <label class="search_check_label"
+                                                           for="property_{{ $row_property_type->id }}">
+                                                        {{ $row_property_type->name }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <div class="divider-line-fluid"></div>
+
+                                        <div class="left-sidebar-container-4">
+                                            <div class="guests-container">
+                                                <div class="left-side-bar-title">
+                                                    Guests
+                                                </div>
+                                                <div class="left-sidebar-dropdown-container">
+                                                    <div class="select-container" style="z-index: 70">
+                                                        <select class="selectpicker">
+                                                            <option>1+</option>
+                                                            <option>2+</option>
+                                                            <option>3+</option>
+                                                            <option>4+</option>
+                                                            <option>5+</option>
+                                                            <option>6+</option>
+                                                            <option>7+</option>
+                                                            <option>8+</option>
+                                                            <option>9+</option>
+                                                            <option>10+</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="divider-line-fluid"></div>
+
+                                        <div class="left-sidebar-container-7">
+                                            <div class="additional-filters-container">
+                                                <div class="left-side-bar-title">
+                                                    Additional Filters
+                                                </div>
+                                                <div class="rv-type-container">
+                                                    <input type="checkbox" name="filter_instant_book" id="filter_instant_book">
+                                                    <label for="filter_instant_book" class="search_check_label">
+                                                        <span class="glyphicon glyphicon-flash" style="color: #f6bc16!important"></span>
+                                                        Instant Book
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-primary" style="width: 100%">SEARCH</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

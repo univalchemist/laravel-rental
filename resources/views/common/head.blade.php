@@ -10,13 +10,18 @@
 <meta name="daterangepicker_format" content = "{{ $daterangepicker_format  }}">
 <meta name="datepicker_format" content = "{{$datepicker_format }}"> 
 <meta name="datedisplay_format" content = "{{ strtolower(DISPLAY_DATE_FORMAT) }}"> 
-<meta name="php_date_format" content = "{{ PHP_DATE_FORMAT }}"> 
+<meta name="php_date_format" content = "{{ PHP_DATE_FORMAT }}">
+<!-- Bootstrap 3.3.5 -->
+<link rel="stylesheet" href="{{ url('admin_assets/bootstrap/css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ url('admin_assets/bootstrap/css/bootstrap-select.css') }}">
+<link rel="stylesheet" href="{{ url('css/custom.css') }}">
 
 <link rel="dns-prefetch" href="https://maps.googleapis.com/">
 <link rel="dns-prefetch" href="https://maps.gstatic.com/">
 <link rel="dns-prefetch" href="https://mts0.googleapis.com/">
 <link rel="dns-prefetch" href="https://mts1.googleapis.com/">
 <link rel="shortcut icon" href="{{ $favicon }}">
+
 
 <!--[if IE]><![endif]-->
 <meta charset="utf-8">
@@ -37,7 +42,8 @@
       {!! Html::style('css/common.css?v='.$version) !!}
       {!! Html::style('css/home.css?v='.$version) !!}
       {!! Html::style('css/main.css?v='.$version) !!} 
-      {!! Html::style('css/styles.css?v='.$version) !!}      
+      {!! Html::style('css/styles.css?v='.$version) !!}
+
 
       @endif
 
@@ -57,8 +63,9 @@
       {!! Html::style('css/styles.css?v='.$version) !!} 
       {!! Html::style('css/jquery.bxslider.css?v='.$version) !!}
       {!! Html::style('css/header_two.css?v='.$version) !!}
-      
-      @endif
+
+
+  @endif
 
       @if (Route::current()->uri() != '/')
 

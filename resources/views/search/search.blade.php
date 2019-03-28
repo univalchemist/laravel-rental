@@ -428,6 +428,7 @@
                                                                            value="{{ $row_amenities->id }}"
                                                                            class="pull-left amenities"
                                                                            id="map-search-amenities-{{ $row_amenities->id }}"
+                                                                           id="map-search-amenities-{{ $row_amenities->id }}"
                                                                            ng-checked="{{ (in_array($row_amenities->id, $amenities_selected)) ? 'true' : 'false' }}">
                                                                     {{ $row_amenities->name }}
                                                                 </label>

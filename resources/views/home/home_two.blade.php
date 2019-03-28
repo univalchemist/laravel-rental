@@ -537,7 +537,7 @@
                             <div class="col-lg-12 nopad text-center" style="padding: 0;margin-bottom: 50px">
                                 <div style="margin-top: 40px">
                                     <div class="text-left">
-                                        <strong  style="color: white;font-size: 22px">Explore RV Rentals By State</strong>
+                                        <strong style="color: white;font-size: 22px">Explore RV Rentals By State</strong>
                                     </div>
                                 </div>
                                 <div class="row">

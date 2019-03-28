@@ -1,0 +1,180 @@
+.dropdown-toggle:hover, .dropdown-toggle:active, .btn-default:hover, .btn-default:active {
+    background-color: white!important;
+}
+.glyphicon-question-sign {
+    font-weight: normal!important;
+    color: #414141!important;
+    opacity: 0.6!important;
+}
+
+@media (max-width: 991px) {
+    .show-out-md {
+        display: none!important;
+    }
+    show-in-md {
+        display: block!important;
+    }
+}
+@media (min-width: 992px) {
+    .show-out-md {
+        display: block!important;
+    }
+    .show-in-md {
+        display: none!important;
+    }
+}
+/*Left side bar*/
+.left-sidebar {
+    width: 100%!important;
+    border: 1px solid #ced4da!important;
+}
+[class|=left-sidebar-container] {
+    padding: 10px 10px!important;
+}
+
+.left-side-bar-title {
+    font-size: 18px!important;
+    margin-bottom: 10px!important;
+}
+.selectpicker-divider {
+    width: 0!important;
+}
+.left-sidebar-dropdown-container {
+    display: flex!important;
+    margin-top: 10px!important;
+}
+.select-container {
+    width: 45%!important;
+    display: flex!important;
+    flex: 1!important;
+    -ms-flex: 1!important;
+    -webkit-flex: 1!important;
+}
+.select-container:nth-of-type(2n+1) {
+     margin-right: 2.5%!important;
+}
+.select-container:nth-of-type(2n) {
+    margin-left: 2.5%!important;
+}
+.divider-line-fluid {
+    width: 100%!important;
+    height: 1px!important;
+    border-bottom: 1px solid #ced4da!important;
+}
+.divider-line {
+    height: 1px!important;
+    border-bottom: 1px solid #ced4da!important;
+    margin: 0 10px!important;
+}
+/*Main */
+.main-header {
+    border: 1px solid #ced4da!important;
+    margin: 0 7px!important;
+    display: flex!important;
+    flex-direction: row!important;
+    position: relative!important;
+    padding: 7px 15px!important;
+}
+.some-title {
+    font-size: 16px!important;
+    flex: 1!important;
+}
+.main-header > div > * {
+    position: relative!important;
+    top: 50%!important;
+    -webkit-transform: translateY(-50%)!important;
+    -moz-transform: translateY(-50%)!important;
+    -ms-transform: translateY(-50%)!important;
+    -o-transform: translateY(-50%)!important;
+    transform: translateY(-50%)!important;
+}
+.bootstrap-select {
+    z-index: 2!important;
+}
+.main-container {
+    padding: 10px 0!important;
+}
+.item-container {
+    cursor: pointer!important;
+    margin-bottom: 15px!important;
+    padding: 0 7px!important;
+}
+.item-container:hover .card-button {
+    display: block!important;
+    -webkit-transition: all 0.5s linear!important;
+    -moz-transition: all 0.5s linear!important;
+    -ms-transition: all 0.5s linear!important;
+    -o-transition: all 0.5s linear!important;
+    transition: all 0.5s linear!important;
+}
+
+.card-search {
+    width: 100%!important;
+    border: 1px solid #ced4da!important;
+}
+.card-image-container {
+    position: relative!important;
+}
+.item-like {
+    position: absolute!important;
+    right: 10px!important;
+    top: 10px!important;
+    font-size: 22px!important;
+    color: white!important;
+}
+.card-label {
+    position: absolute;
+    left: 0!important;
+    bottom: 5px!important;
+    padding: 0 10px 0 0!important;
+    height: 20px!important;
+    overflow-y: visible!important;
+    background-color: white!important;
+    display: flex!important;
+}
+.card-label > div {
+
+}
+.card-label > div:nth-of-type(1) {
+    color: #f6bc16!important;
+    font-size: 30px!important;
+    line-height: 18px!important;
+}
+.card-label > div:nth-of-type(2) {
+    color: #377ac9!important;
+    font-size: 12px!important;
+    line-height: 20px!important;
+}
+.card-body {
+    padding: 5px 10px 10px;
+    margin: 5px;
+}
+.card-title-container {
+    width: 100%!important;
+    padding: 5px 0!important;
+    display: flex!important;
+}
+.card-title {
+    width: 100%!important;
+    font-size: 22px!important;
+    color: #377ac9!important;
+    flex: 1!important;
+}
+.card-button {
+    display: none!important;
+}
+.card-description {
+    width: 100%!important;
+    overflow: hidden!important;
+    white-space: nowrap!important;
+    text-overflow: ellipsis!important;
+    font-size: 16px!important;
+    margin-bottom: 5px!important;
+}
+.card-short-description {
+    width: 100%!important;
+    overflow: hidden!important;
+    white-space: nowrap!important;
+    text-overflow: ellipsis!important;
+    font-size: 13px!important;
+}

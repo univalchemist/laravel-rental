@@ -26,6 +26,9 @@
 {!! Html::script('js/daterangepicker.js') !!}
 {!! Html::script('js/lightgallery-all.min.js') !!}
 {!! Html::script('js/lightslider.min.js') !!}
+
+{!! Html::script('admin_assets/bootstrap/js/bootstrap-select.js') !!}
+
 <script type="text/javascript">
   $(document).ready(function() {
     $('.login_popup_head, .bck_btn, .login_popup_open').click(function(e){
