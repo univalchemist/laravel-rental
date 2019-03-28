@@ -507,3 +507,4 @@ writeCookie = function(cname, cvalue, days) {
 getCookiebyName();
 
 </script>
+@yield('script')

@@ -243,15 +243,39 @@
                                     <div class="left-side-bar-title">
                                         {{ trans('messages.lys.amenities') }}
                                     </div>
+                                    @php $type_num = 1 @endphp
                                     @foreach($amenities as $row_amenities)
-                                        <div class=" rv-type-container">
-                                            <input type="checkbox" id="mob_amenities_{{ $row_amenities->id }}"
-                                                   value="{{ $row_amenities->id }}"
-                                                   class="amenities" {{in_array($row_amenities->id, $amenities_selected) ? 'checked' : ''}} />
-                                            <label class="search_check_label"
-                                                   for="mob_amenities_{{ $row_amenities->id }}">{{ $row_amenities->name }}</label>
-                                        </div>
+
+                                        @if($type_num < 5)
+                                            <div class=" rv-type-container">
+                                                <input type="checkbox" id="mob_amenities_{{ $row_amenities->id }}"
+                                                       value="{{ $row_amenities->id }}"
+                                                       class="amenities" {{in_array($row_amenities->id, $amenities_selected) ? 'checked' : ''}} />
+                                                <label class="search_check_label"
+                                                       for="mob_amenities_{{ $row_amenities->id }}">{{ $row_amenities->name }}</label>
+                                            </div>
+                                        @else
+                                            @if($type_num == 5)
+                                                <div class="rv-type-more-tab">
+                                                    <div class="rv-type-more-less-button">See more...</div>
+                                                    <div class="rv-type-more-container">
+                                            @endif
+                                                <div class="rv-type-container">
+                                                    <input type="checkbox" id="mob_amenities_{{ $row_amenities->id }}"
+                                                           value="{{ $row_amenities->id }}"
+                                                           class="amenities" {{in_array($row_amenities->id, $amenities_selected) ? 'checked' : ''}} />
+                                                    <label class="search_check_label"
+                                                           for="mob_amenities_{{ $row_amenities->id }}">{{ $row_amenities->name }}</label>
+                                                </div>
+                                        @endif
+
+                                        @php $type_num++ @endphp
                                     @endforeach
+                                            @if($type_num > 4)
+                                                    </div>
+                                                    <div class="rv-type-more-less-button" style="display: none">See less</div>
+                                                </div >
+                                            @endif
 
                                 </div>
                                 <div class="divider-line"></div>
@@ -260,18 +284,44 @@
                                     <div class="left-side-bar-title">
                                         {{ trans('messages.lys.property_type') }}
                                     </div>
+                                    @php $property_num = 1 @endphp
                                     @foreach($property_type_dropdown as $row_property_type)
-                                            <div class=" rv-type-container">
-                                                <input type="checkbox"
-                                                       id="property_{{ $row_property_type->id }}"
-                                                       value="{{ $row_property_type->id }}"
-                                                       class="property_type" {{(in_array($row_property_type->id, $property_type_selected)) ? 'checked' : ''}} />
-                                                <label class="search_check_label"
-                                                       for="property_{{ $row_property_type->id }}">
-                                                    {{ $row_property_type->name }}
-                                                </label>
-                                            </div>
+                                        @if($property_num < 5)
+                                        <div class="rv-property-container">
+                                            <input type="checkbox"
+                                                   id="property_{{ $row_property_type->id }}"
+                                                   value="{{ $row_property_type->id }}"
+                                                   class="property_type" {{(in_array($row_property_type->id, $property_type_selected)) ? 'checked' : ''}} />
+                                            <label class="search_check_label"
+                                                   for="property_{{ $row_property_type->id }}">
+                                                {{ $row_property_type->name }}
+                                            </label>
+                                        </div>
+                                        @else
+                                            @if($property_num == 5)
+                                                <div class="rv-property-more-tab">
+                                                    <div class="rv-property-more-less-button">See more...</div>
+                                                    <div class="rv-property-more-container">
+                                            @endif
+                                                <div class=" rv-type-container">
+                                                    <input type="checkbox"
+                                                           id="property_{{ $row_property_type->id }}"
+                                                           value="{{ $row_property_type->id }}"
+                                                           class="property_type" {{(in_array($row_property_type->id, $property_type_selected)) ? 'checked' : ''}} />
+                                                    <label class="search_check_label"
+                                                           for="property_{{ $row_property_type->id }}">
+                                                        {{ $row_property_type->name }}
+                                                    </label>
+                                                </div>
+                                        @endif
+
+                                        @php $property_num++ @endphp
                                     @endforeach
+                                    @if($property_num > 4)
+                                                    </div>
+                                                    <div class="rv-property-more-less-button" style="display: none">See less</div>
+                                                </div >
+                                    @endif
                                 </div>
 
                                 <div class="divider-line-fluid"></div>
@@ -377,7 +427,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -412,7 +462,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -447,7 +497,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -482,7 +532,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -517,7 +567,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -552,7 +602,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -587,7 +637,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -622,7 +672,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -657,7 +707,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -692,7 +742,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6 col-xs-12 item-container">
-                                        <div class="card">
+                                        <div class="card-search">
                                             <div class="card-image-container">
                                                 <img class="card-img-top img-responsive" src="{{asset('images/city_new2.jpg')}}" alt="Card image cap">
                                                 <div class="item-like">
@@ -872,4 +922,18 @@
             </div>
         </div>
     </main>
+@stop
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.rv-type-more-less-button', function () {
+                $('.rv-type-more-container').slideToggle(500);
+                $('.rv-type-more-less-button').fadeToggle(500);
+            });
+            $(document).on('click', '.rv-property-more-less-button', function () {
+                $('.rv-property-more-container').slideToggle(500);
+                $('.rv-property-more-less-button').fadeToggle(500);
+            });
+        })
+    </script>
 @stop

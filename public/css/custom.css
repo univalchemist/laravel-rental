@@ -178,3 +178,28 @@
     text-overflow: ellipsis!important;
     font-size: 13px!important;
 }
+.btn-sm {
+    padding: 5px 10px!important;
+    font-size: 12px!important;
+    line-height: 1.5!important;
+    border-radius: 3px!important;
+    background-color: #377ac9!important;
+    border-color: #377ac9!important;
+}
+.rv-type-more-less-button {
+    cursor: pointer;
+    color: #0091ff;
+}
+.rv-type-more-container {
+    display: none;
+}
+.rv-property-more-less-button {
+    cursor: pointer;
+    color: #0091ff;
+}
+.rv-property-more-container {
+    display: none;
+}
+.hide {
+    display: none;
+}
