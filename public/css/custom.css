@@ -6,8 +6,21 @@
     color: #414141!important;
     opacity: 0.6!important;
 }
+@media (max-width: 575px) {
+    .some-title {
+        display: block!important;
+        width: 100%!important;
+    }
+    .sort-order-container {
+        width: 100%!important;
+        margin-top: 10px;
+    }
+    .main-header {
+        display: block!important;
+    }
+}
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
     .show-out-md {
         display: none!important;
     }
@@ -15,7 +28,7 @@
         display: block!important;
     }
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .show-out-md {
         display: block!important;
     }
@@ -70,7 +83,7 @@
 .main-header {
     border: 1px solid #ced4da!important;
     margin: 0 7px!important;
-    display: flex!important;
+    display: flex;
     flex-direction: row!important;
     position: relative!important;
     padding: 7px 15px!important;
@@ -78,15 +91,15 @@
 .some-title {
     font-size: 16px!important;
     flex: 1!important;
+    color: #565a5c;
+    line-height: 32px!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
 .main-header > div > * {
     position: relative!important;
-    top: 50%!important;
-    -webkit-transform: translateY(-50%)!important;
-    -moz-transform: translateY(-50%)!important;
-    -ms-transform: translateY(-50%)!important;
-    -o-transform: translateY(-50%)!important;
-    transform: translateY(-50%)!important;
 }
 .bootstrap-select {
     z-index: 2!important;
@@ -202,4 +215,23 @@
 }
 .hide {
     display: none;
+}
+.card-star-body {
+    height: 18px;
+}
+.card-star {
+    color: #377ac9;
+    font-size: 18px;
+}
+.sort-order-container {
+    display: flex;
+}
+.sort-order-container > button {
+    margin-right: 10px!important;
+    padding: 6px 12px!important;
+}
+.filter-btn {
+    margin-bottom: 0!important;
+    margin-top: 0!important;
+    margin-left: 0!important;
 }

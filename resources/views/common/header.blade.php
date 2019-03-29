@@ -333,25 +333,25 @@ HostExperienceBladeCommentEnd--}}
     <ul class="nav pull-left  list-unstyled search-form-container" id="search-form-header">
       <li id="header-search" class="search-bar-wrapper pull-left medium-right-margin">
         <form action="{{ url('/') }}/s" class=" search-form @if(Request::segment(1) != 's') normal_header_form @else search_header_form @endif" >
-          <div class="search-bar">
-            <i class="icon icon-search icon-gray h4"></i>
-            <label class="screen-reader-only" for="header-search-form">{{ trans('messages.header.where_are_you_going') }}</label>
-            <input type="text" placeholder="{{ trans('messages.header.where_are_you_going') }}" autocomplete="off" name="location" id="header-search-form" class="location" value="">
-            {{--HostExperienceBladeCommentStart
-            <div class="panel-new-header menu-header normal-line-height search_new_header">
-              <strong>{{ trans('messages.referrals.explore') }}</strong>
-              <ul class="header_refinement_ul">
-                <input type="hidden" name="header_refinement" class="header_refinement_input" value="Homes">
-                <li><button class="header_refinement active" data="Homes" type="button">{{ trans('messages.header.homes') }}</button>
-                </li>
-                <li><button class="header_refinement" data="Experiences" type="button">{{ trans_choice('messages.home.experience',1) }}</button></li>
-              </ul>
-            </div>
-            HostExperienceBladeCommentEnd--}}
+          {{--<div class="search-bar">--}}
+            {{--<i class="icon icon-search icon-gray h4"></i>--}}
+            {{--<label class="screen-reader-only" for="header-search-form">{{ trans('messages.header.where_are_you_going') }}</label>--}}
+            {{--<input type="text" placeholder="{{ trans('messages.header.where_are_you_going') }}" autocomplete="off" name="location" id="header-search-form" class="location" value="">--}}
+            {{--HostExperienceBladeCommentStart--}}
+            {{--<div class="panel-new-header menu-header normal-line-height search_new_header">--}}
+              {{--<strong>{{ trans('messages.referrals.explore') }}</strong>--}}
+              {{--<ul class="header_refinement_ul">--}}
+                {{--<input type="hidden" name="header_refinement" class="header_refinement_input" value="Homes">--}}
+                {{--<li><button class="header_refinement active" data="Homes" type="button">{{ trans('messages.header.homes') }}</button>--}}
+                {{--</li>--}}
+                {{--<li><button class="header_refinement" data="Experiences" type="button">{{ trans_choice('messages.home.experience',1) }}</button></li>--}}
+              {{--</ul>--}}
+            {{--</div>--}}
+            {{--HostExperienceBladeCommentEnd--}}
 
 
 
-          </div>
+          {{--</div>--}}
           <div id="header-search-settings" class="panel search-settings header-menu rem_hed">
             <div class="panel-body clearfix basic-settings">
               <div class="setting checkin lang-chang-label">

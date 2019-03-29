@@ -127,146 +127,13 @@
       $('.makent-header .header--sm .nav-content--sm').css('left','-285px');
     });
 
-// if(document.getElementById('header-search-form'))
-//     {
-//         header_autocomplete= new google.maps.places.Autocomplete(document.getElementById('header-search-form'));
-//         google.maps.event.addListener(header_autocomplete, 'place_changed', function() {
-//             $('#header-search-settings').addClass('shown');
-//             // $("#header-search-checkin").datepicker("show");
-//         });
-//     }
-    // if(document.getElementById('search-modal--sm'))
-    // {
-    //     sm_autocomplete= new google.maps.places.Autocomplete(document.getElementById('header-location--sm'));
-    //     google.maps.event.addListener(sm_autocomplete, 'place_changed', function() {
-    //         $("#modal_checkin").datepicker("show");
-    //     });
-    // }
-//     $("#modal_checkin").datepicker({
-//     dateFormat: "dd-mm-yy",
-//     minDate: 0,
-//     beforeShow: function(input, inst) {
-//         setTimeout(function() {
-//                 inst.dpDiv.find('a.ui-state-highlight').removeClass('ui-state-highlight');
-//             }, 100);
-//     },
-//     onSelect: function (date) 
-//     {
-//         var modal_checkout = $('#modal_checkin').datepicker('getDate');
-//         modal_checkout.setDate(modal_checkout.getDate() + 1);
-//         $('#modal_checkout').datepicker('setDate', modal_checkout);
-//         $('#modal_checkout').datepicker('option', 'minDate', modal_checkout);
-//         setTimeout(function(){
-//             $("#modal_checkout").datepicker("show");
-//         },20);
-//     }
-// });
 
-// $('#modal_checkout').datepicker({
-//     dateFormat: "dd-mm-yy",
-//     minDate: 1,
-//     onClose: function () 
-//     {
-//         var modal_checkin = $('#checkin').datepicker('getDate');
-//         var modal_checkout = $('#modal_checkout').datepicker('getDate');
-//         if (modal_checkout <= modal_checkin) 
-//         {
-//             var minDate = $('#modal_checkout').datepicker('option', 'minDate');
-//             $('#modal_checkout').datepicker('setDate', minDate);
-//         }
-//     }
-// });
-// function trigger_checkin()
-// {
-//     $("#checkin").datepicker("show");
-// }
-
-// $("#checkin").datepicker({
-//     dateFormat: "dd-mm-yy",
-//     minDate: 0,
-//     beforeShow: function(input, inst) {
-//         setTimeout(function() {
-//                 inst.dpDiv.find('a.ui-state-highlight').removeClass('ui-state-highlight');
-//             }, 100);
-//     },
-//     onSelect: function (date) 
-//     {
-//         var checkout = $('#checkin').datepicker('getDate');
-//         checkout.setDate(checkout.getDate() + 1);
-//         $('#checkout').datepicker('setDate', checkout);
-//         $('#checkout').datepicker('option', 'minDate', checkout);
-//         setTimeout(function(){
-//             $("#checkout").datepicker("show");
-//         },20);
-//     }
-// });
-
-// $('#checkout').datepicker({ 
-//     dateFormat: "dd-mm-yy",
-//     minDate: 1,
-//     onClose: function () 
-//     {
-//         var checkin = $('#checkin').datepicker('getDate');
-//         var checkout = $('#checkout').datepicker('getDate');
-//         if (checkout <= checkin) 
-//         {
-//             var minDate = $('#checkout').datepicker('option', 'minDate');
-//             $('#checkout').datepicker('setDate', minDate);
-//         }
-//         if($('#checkin').val()=='')
-//         {
-//          var checkin = $('#checkout').datepicker('getDate');
-//         checkin.setDate(checkin.getDate() -1 );
-//         $('#checkin').datepicker('setDate',  new Date());
-//         $('#checkout').datepicker('option', 'minDate', checkout);
-//         setTimeout(function(){
-//             $("#checkin").datepicker("show");
-//         },20);
-//         }
-//     }
-// });
 $('.nav-mask--sm').click(function()
 {
   $('.header--sm .nav--sm').css('visibility','hidden');
   $('.makent-header .header--sm .nav-content--sm').css('left','-285px');
 });
 
-// $('.search-modal-trigger, #sm-search-field').click(function()
-// {
-//     $('#search-modal--sm').removeClass('hide');
-//     $('#search-modal--sm').attr('aria-hidden','false');
-// });
-
-// $('.search-modal-container .modal-close').click(function()
-// {
-//     $('#search-modal--sm').addClass('hide');
-//     $('#search-modal--sm').attr('aria-hidden','true');
-// });
-// $('#search-form--sm-btn').click(function(event)
-// {
-//     var location  = $("#header-search-form-mob").val();
-//     if(location == '') {
-//         $('.searchbar__location-error').removeClass('hide');
-//         return false;
-//     }
-//     else
-//         $('.searchbar__location-error').addClass('hide');
-
-//     var sm_checkin = $('#modal_checkin').val();
-//     var sm_checkout = $('#modal_checkout').val();
-//     var sm_guests = $('#modal_guests').val();
-//     var sm_room_type = '';
-
-//     $('[id^="room-type-"]').each(function()
-//     {
-//         if($(this).is(':checked'))
-//             sm_room_type += $(this).val()+',';
-//     });
-//     sm_room_type = sm_room_type.slice(0,-1);
-//     if(location){ var locations = location.replace(" ", "+"); }
-//     window.location.href = APP_URL+'/s?location='+locations+'&checkin='+sm_checkin+'&checkout='+sm_checkout+'&guests='+sm_guests+'&room_type='+sm_room_type;
-//     event.preventDefault();
-// });
 $(document).on('change','#user_profile_pic', function() {
   $('#ajax_upload_form').submit();
 });
@@ -314,6 +181,10 @@ $(document).on('change','#user_profile_pic', function() {
   @if (Route::current()->uri() == 's')
   {!! Html::script('js/home_two.js?v='.$version) !!}
   {!! Html::script('js/infobubble.js') !!}
+  @endif
+  @if (Route::current()->uri() == 's0')
+      {!! Html::script('js/home_two.js?v='.$version) !!}
+      {!! Html::script('js/infobubble.js') !!}
   @endif
   @if (Route::current()->uri() == 'home_two')
   {!! Html::script('js/jquery.bxslider.min.js') !!}  
@@ -500,7 +371,7 @@ var domain =  result.replace(/(^\w+:|^)\/\//, '');
 writeCookie = function(cname, cvalue, days) {
   var dt, expires;
   dt = new Date();
-  dt.setTime(dt.getTime()+(days*24*60*60*1000));
+  dt.setTime(dt.getTime()+(days*24*60*60*1000)) ;
   expires = "; expires="+dt.toGMTString();
   document.cookie = cname+"="+cvalue+expires+'; domain='+domain;
 }
