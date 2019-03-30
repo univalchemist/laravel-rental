@@ -1,7 +1,8 @@
-@extends('template_two')
+
+@extends('template')
 
 @section('main')
-    {{--<div class="flash-container"></div>--}}
+    <div class="flash-container"></div>
     <main id="site-content" role="main" ng-controller="search-page" ng-init="setParams()">
         <div class="whole-section sect_home">
             <div class="page-container-responsive new-page-container mini-rel-top row-space-top-1">
@@ -187,7 +188,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 50px;">
                     <div class="row">
                         <!-- side bar -->
-                        <div class="col-lg-3 col-md-4 show-out-md">
+                        <div class="col-lg-3 col-md-4 show-out-md" ng-init="opened_filter = '';">
                             <div class="left-sidebar">
                                 <div class="left-sidebar-container-1">
                                     <div class="left-side-bar-title">
@@ -843,6 +844,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
